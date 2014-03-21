@@ -1,10 +1,10 @@
 {
-    "name": "dmlab/ZF2JsAppender",
+    "name": "dmlab/zf2-js-appender",
     "type": "library",
     "description": "",
     "keywords": ["js", "javascript", "configurator", "sdk", "js"],
     "homepage": "https://github.com/dmlab/zf2-js-appender",
-    "license": "MIT",
+    "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Fontana Lorenzo",
