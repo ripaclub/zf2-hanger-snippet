@@ -3,8 +3,6 @@
 namespace ZF2JsAppender;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
 
 /**
  * Class Module

@@ -22,7 +22,10 @@
     },
     "autoload": {
         "psr-0": {
-            "ZF2JsAppender\\": "src/"
-        }
+            "ZF2JsAppender": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }
