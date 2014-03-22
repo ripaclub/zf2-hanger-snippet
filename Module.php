@@ -3,12 +3,13 @@
 namespace ZF2JsAppender;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
 /**
  * Class Module
  * @author Lorenzo Fontana <fontanalorenzo@me.com>
  */
-class Module implements AutoloaderProviderInterface
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
     /**
      * {@inheritdoc}
