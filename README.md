@@ -22,9 +22,8 @@ return array(
     ),
 
     'hanger-snippet' => array(
-        'ga' => array(
-        	'config_key' => 'google-analytics', //the config node in the global config, if any
-            'template'   => 'google-analytics.phtml',
+        'google-analytics' => array(
+        	'config_key' => 'google-analytics', //the config node in the global config
             'values' => array(
                 //other values for the template
             ),
@@ -33,6 +32,30 @@ return array(
     ),
 );
 ```
+
+### Facebook JavaScript SDK
+
+**In your configuration**
+
+```php
+return array(
+    'facebook' => array(
+   		'appId' => '....',
+    ),
+
+    'hanger-snippet' => array(
+        'facebook-sdk' => array(
+        	'config_key' => 'facebook', //the config node in the global config
+            'values' => array(
+                'status' => true,
+                'xfbml   => true,
+            ),
+        )
+
+    ),
+);
+```
+
 
 **In your layout before the body closing tag**
 

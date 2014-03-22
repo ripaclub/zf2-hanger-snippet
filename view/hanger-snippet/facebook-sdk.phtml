@@ -1,0 +1,29 @@
+<?php
+/*
+ * @link https://developers.facebook.com/docs/javascript/quickstart
+ */
+
+if (!isset($locale)) {
+    $locale = 'en_US';
+}
+
+?>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<?php echo $appId?>',
+      status     : <?php echo (isset($status) && $status ? 'true' : 'false')?>,
+      xfbml      : <?php echo (isset($xfbml) && $xfbml ? 'true' : 'false')?>
+    });
+    <?php if (isset($fbAsynchInitHook)) echo $fbAsynchInitHook?>
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/<?php echo $locale?>/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
