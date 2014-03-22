@@ -3,11 +3,17 @@ namespace HangerSnippet\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\HelperPluginManager;
 use HangerSnippet\View\Helper\SnippetHelper;
 
 
 class SnippetHelperServiceFactory implements FactoryInterface
 {
+    /**
+     * @var string
+     */
+    protected $configKey = 'hanger_snippet';
+
     /**
      * Create an appender helper service
      *
@@ -16,12 +22,21 @@ class SnippetHelperServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('Config');
-
-
-        $snippetsConfig = isset($config['hanger_snippet']) ? $config['hanger_snippet'] : array();
-
         $snippetHelper = new SnippetHelper();
+
+        //Get the top level service locator
+        $serviceManager = $serviceLocator;
+        if ($serviceManager instanceof HelperPluginManager) {
+            $serviceManager = $serviceManager->getServiceLocator();
+        }
+
+        if (!$serviceManager->has('Config')) {
+            return $snippetHelper;
+        }
+
+        $config = $serviceManager->get('Config');
+
+        $snippetsConfig = isset($config[$this->configKey]) ? $config[$this->configKey] : array();
 
         if (isset($snippetsConfig['snippets']) && is_array($snippetsConfig['snippets'])) {
 

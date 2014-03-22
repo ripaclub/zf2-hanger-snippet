@@ -13,6 +13,11 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
     private $viewHelperPluginManager;
 
     /**
+     * @var \Zend\ServiceManager\ServiceManager
+     */
+    private $serviceManager;
+
+    /**
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
@@ -22,26 +27,30 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager =  new ServiceManager();
 
         $this->serviceManager->setService('Config', array(
+            'google-analytics' => array(
+                'monitoring_id' => 'UA-XXXXXXXX-X',
+                'domain'        => 'yourdomain.com'
+            ),
 
+            'hanger-snippet' => array(
+                'ga' => array(
+                    'config_key' => 'google-analytics', //the config node in the global config, if any
+                    'template'   => 'google-analytics.phtml',
+                    'values' => array(
+                        //other values for the template
+                    ),
+                )
+            ),
         ));
 
-//         $this->viewHelperPluginManager = new HelperPluginManager(new ServiceManagerConfig(array(
-//             'factories' => [
-//                 'hangerSnippet' => 'HangerSnippet\Service\SnippetHelperServiceFactory'
-//              ],
-//             )
-//         ));
-        //$this->viewHelperPluginManager->setServiceLocator($this->serviceManager);
-
+        $this->viewHelperPluginManager = new HelperPluginManager();
+        $this->viewHelperPluginManager->setFactory('hangerSnippet', 'HangerSnippet\Service\SnippetHelperServiceFactory');
+        $this->viewHelperPluginManager->setServiceLocator($this->serviceManager);
     }
 
     public function testCreateService()
     {
-        $this->markTestSkipped('TODO');
-        return;
         $helper = $this->viewHelperPluginManager->get('hangerSnippet');
-        echo get_class($helper);exit;
-
         $this->assertInstanceOf('\HangerSnippet\View\Helper\SnippetHelper', $helper);
     }
 
