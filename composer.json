@@ -1,20 +1,24 @@
 {
-    "name": "dmlab/zf2-js-appender",
+    "name": "dmlab/zf2-hanger-snippet",
     "type": "library",
     "description": "",
-    "keywords": ["js", "javascript", "configurator", "sdk", "js"],
-    "homepage": "https://github.com/dmlab/zf2-js-appender",
+    "keywords": ["js", "javascript", "configurator", "sdk", "js", "appender", "snippet"],
+    "homepage": "https://github.com/dmlab/zf2-hanger-snippet",
     "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Fontana Lorenzo",
             "email": "fontanalorenzo@me.com",
             "homepage": "https://github.com/fontanalorenzo"
+        },
+        {
+            "name": "Leonardo Grasso",
+            "email": "me@leonardograsso.com",
+            "homepage": "https://github.com/leogr"
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "kriswallsmith/assetic": "1.1.*"
+        "php": ">=5.4"
     },
     "require-dev": {
         "zendframework/zendframework": "2.*",
@@ -22,7 +26,7 @@
     },
     "autoload": {
         "psr-0": {
-            "ZF2JsAppender": "src/"
+            "HangerSnippet": "src/"
         },
         "classmap": [
             "./Module.php"

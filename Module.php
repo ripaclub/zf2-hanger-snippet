@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF2JsAppender;
+namespace HangerSnippet;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;

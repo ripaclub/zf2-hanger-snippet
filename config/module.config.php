@@ -2,13 +2,13 @@
 
 return [
     'view_helpers' => [
-        'invokables' => [
-            'jsAppender' => 'ZF2JsAppender\View\Helper\AppenderHelper'
-        ]
+        'factories' => [
+            'hangerSnippet' => 'HangerSnippet\Service\SnippetHelperServiceFactory'
+        ],
     ],
     'view_manager' => [
         'template_path_stack' => [
-            'zf2_js_appender' => __DIR__ . '/../view',
+            'hanger-snippet' => __DIR__ . '/../view',
         ],
     ],
 ];

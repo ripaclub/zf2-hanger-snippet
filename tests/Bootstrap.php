@@ -2,4 +2,4 @@
 
 /* var $loader \Composer\Autoload\ClassLoader */
 $loader = include __DIR__ . '/../vendor/autoload.php';
-$loader->add('ZF2JsAppender\\', __DIR__);
+$loader->add('HangerSnippet\\', __DIR__);
