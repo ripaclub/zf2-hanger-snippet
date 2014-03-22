@@ -1,6 +1,6 @@
-# ZF2 Js Appender
+# HangerSnippet
 
-This ZF2 Module aims to provide a fast way to configure code snippeds for JS libraries and more.
+This ZF2 Module aims to provide a fast way to configure and append code snippeds for JS libraries.
 
 ## Rationale
 
@@ -16,19 +16,20 @@ and perhaps with the ability to override the configuration rather than throw the
 
 ```php
 return array(
-    'google-analytics' => array(
-   		'monitoring_id' => 'UA-XXXXXXXX-X',
+    'ga' => array(
+        'monitoring_id' => 'UA-XXXXXXXX-X',
         'domain'        => 'yourdomain.com'
-    ),
+     ),
 
-    'hanger-snippet' => array(
-        'google-analytics' => array(
-        	'config_key' => 'google-analytics', //the config node in the global config
-            'values' => array(
-                //other values for the template
-            ),
+    'hanger_snippet' => array(
+        'snippets' => array(
+            'google-analytics' => array(
+                'config_key' => 'ga', //the config node in the global config, if any
+                'values' => array(
+                    //other values for the template
+                ),
+            )
         )
-
     ),
 );
 ```
@@ -40,18 +41,19 @@ return array(
 ```php
 return array(
     'facebook' => array(
-   		'appId' => '....',
+           'appId' => '....',
     ),
 
-    'hanger-snippet' => array(
-        'facebook-sdk' => array(
-        	'config_key' => 'facebook', //the config node in the global config
-            'values' => array(
-                'status' => true,
-                'xfbml   => true,
-            ),
+    'hanger_snippet' => array(
+        'snippets' => array(
+            'facebook-sdk' => array(
+                'config_key' => 'facebook', //the config node in the global config, if any
+                'values' => array(
+                    'status' => true,
+                    'xfbml'  => true,
+                ),
+            )
         )
-
     ),
 );
 ```

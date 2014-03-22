@@ -27,18 +27,19 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager =  new ServiceManager();
 
         $this->serviceManager->setService('Config', array(
-            'google-analytics' => array(
+            'ga' => array(
                 'monitoring_id' => 'UA-XXXXXXXX-X',
                 'domain'        => 'yourdomain.com'
             ),
 
-            'hanger-snippet' => array(
-                'ga' => array(
-                    'config_key' => 'google-analytics', //the config node in the global config, if any
-                    'template'   => 'google-analytics.phtml',
-                    'values' => array(
-                        //other values for the template
-                    ),
+            'hanger_snippet' => array(
+                'snippets' => array(
+                    'google-analytics' => array(
+                        'config_key' => 'ga', //the config node in the global config, if any
+                        'values' => array(
+                            //other values for the template
+                        ),
+                    )
                 )
             ),
         ));
