@@ -8,16 +8,29 @@ Often happens to have to set up a Javascript library and many times it would be 
 and perhaps with the ability to override the configuration rather than throw them in the view.
 
 
-```
+## Examples
+
+### Google Analytics
+
+**In your configuration**
+
+```php
 return array(
     'zf2_js_appender' => array(
-        'fb' => array(
-            'type'   => 'facebook-sdk',
+        'ga' => array(
+            'type'   => 'google-analytics',
             'values' => array(
-                'apikey' => '123'
+                'monitoring_id' => 'UA-XXXXXXXX-X',
+                'domain'        => 'yourdomain.com'
             ),
         )
 
     ),
 );
+```
+
+**In your template**
+
+```php
+<?php echo $this->jsAppender('ga');?>
 ```

@@ -3,7 +3,7 @@
 return [
     'view_helpers' => [
         'invokables' => [
-            'js_appender' => 'ZF2JsAppender\View\Helper\AppenderHelper'
+            'jsAppender' => 'ZF2JsAppender\View\Helper\AppenderHelper'
         ]
     ],
     'view_manager' => [
