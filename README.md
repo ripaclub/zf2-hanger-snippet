@@ -1,6 +1,6 @@
 # ZF2 Js Appender
 
-This ZF2 Module aims to provide a fast way to configure Javascript libraries.
+This ZF2 Module aims to provide a fast way to configure code snippeds for JS libraries and more.
 
 ## Rationale
 
@@ -16,12 +16,17 @@ and perhaps with the ability to override the configuration rather than throw the
 
 ```php
 return array(
-    'zf2_js_appender' => array(
+    'google-analytics' => array(
+   		'monitoring_id' => 'UA-XXXXXXXX-X',
+        'domain'        => 'yourdomain.com'
+    ),
+
+    'hanger-snippet' => array(
         'ga' => array(
-            'type'   => 'google-analytics',
+        	'config_key' => 'google-analytics', //the config node in the global config, if any
+            'template'   => 'google-analytics.phtml',
             'values' => array(
-                'monitoring_id' => 'UA-XXXXXXXX-X',
-                'domain'        => 'yourdomain.com'
+                //other values for the template
             ),
         )
 
@@ -29,8 +34,8 @@ return array(
 );
 ```
 
-**In your template**
+**In your layout before the body closing tag**
 
 ```php
-<?php echo $this->jsAppender('ga');?>
+<?php echo $this->hangerSnippet();?>
 ```
