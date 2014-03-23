@@ -33,7 +33,7 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
         $this->helper->setView($view);
 
         //render one
-        $return = $this->helper->render('test');
+        $return = $this->helper->renderSnippet('test');
         $this->assertContains('<script type="text/javascript">var foo = \'ABC\';</script>', $return);
 
         //render all

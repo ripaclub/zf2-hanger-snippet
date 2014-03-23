@@ -63,6 +63,7 @@ class SnippetHelperServiceFactory implements FactoryInterface
                     $name,
                     isset($snippetsConfig['template']) ? $snippetsConfig['template'] : 'hanger-snippet/' . $name,
                     $values,
+                    !isset($snippetsConfig['placement']) ?: $snippetsConfig['placement'],
                     isset($snippetsConfig['enabled']) ? $snippetsConfig['enabled'] : $enableAll
                 );
             }

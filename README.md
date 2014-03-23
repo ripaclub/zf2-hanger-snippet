@@ -8,7 +8,42 @@ Often happens to have to set up a Javascript library and many times it would be 
 and perhaps with the ability to override the configuration rather than throw them in the view.
 
 
-## Examples
+## Setup
+
+**In your layout before the body closing tag**
+
+```php
+<?php echo $this->hangerSnippet();?>
+```
+
+Optionally, if you need to add more placements:
+
+```php
+<?php echo $this->hangerSnippet()->render('placementName');?>
+```
+
+## Configuration
+
+```php
+return array(
+    'hanger_snippet' => array(
+        'enable_all' => true, //if not specified true by default
+        'snippets' => array(
+            'snippet-name' => array(
+                'config_key'  => '', //config node in the global config, if any, retrivied data will be merged with values then passed to the template
+                'template'    => '', //template script path, if not specified 'hanger-snippet/snippet-name' will be used
+                'placement'   => '', //placement identifier, if not specified the default placement will be used
+                'enabled'     => true, //if not specified 'enable_all' value will be used
+                'values' => array(
+                    //other values for the template
+                ),
+            )
+        )
+    ),
+);
+```
+
+## Built-in snippets
 
 ### Google Analytics
 
@@ -56,11 +91,4 @@ return array(
         )
     ),
 );
-```
-
-
-**In your layout before the body closing tag**
-
-```php
-<?php echo $this->hangerSnippet();?>
 ```

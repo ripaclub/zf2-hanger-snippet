@@ -67,14 +67,16 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
      * @param string    $name          The Snippet name
      * @param string    $template      The Snippet template
      * @param array     $values
+     * @param string|null $placement
      * @param bool      $enable
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name, $template, array $values = [], $enable = true)
+    public function appendSnippet($name, $template, array $values = [], $placement = null, $enable = true)
     {
         $this->snippets[$name] = [
-            'template' => $template,
-            'values'   => $values,
+            'placement' => $placement,
+            'template'  => $template,
+            'values'    => $values,
         ];
 
         $this->setEnabled($name, $enable);
@@ -82,25 +84,34 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     }
 
     /**
-     * Render
-     * @param string $name  The Snippet name
+     * Render a single snippet
+     *
+     * @param string $name The snippet name
      * @throws InvalidArgumentException
      * @return string
      */
-    public function render($name = null)
+    public function renderSnippet($name)
+    {
+        if (!isset($this->snippets[$name])) {
+            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+        }
+
+        return $this->getView()->render($this->snippets[$name]['template'], $this->snippets[$name]['values']);
+    }
+
+    /**
+     * Render
+     * @param string $placement
+     * @throws InvalidArgumentException
+     * @return string
+     */
+    public function render($placement = null)
     {
         $snippets = $this->enabledSnippets;
 
-        if (null !== $name) {
-            if (!isset($snippets[$name])) {
-                throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
-            }
-            $snippets = [$name => $snippets[$name]];
-        }
-
         $pieces = [];
         foreach ($snippets as $name => $enabled) {
-            if (!$enabled) {
+            if (!$enabled || $this->snippets[$name]['placement'] != $placement) {
                 continue;
             }
             $pieces[] = $this->getView()->render($this->snippets[$name]['template'], $this->snippets[$name]['values']);
