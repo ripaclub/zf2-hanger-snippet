@@ -42,7 +42,6 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($return, $this->helper->toString());
         $this->assertSame($return, (string) $this->helper);
-
     }
 
 

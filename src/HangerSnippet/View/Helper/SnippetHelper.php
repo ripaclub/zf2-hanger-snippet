@@ -111,10 +111,9 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
 
         $pieces = [];
         foreach ($snippets as $name => $enabled) {
-            if (!$enabled || $this->snippets[$name]['placement'] != $placement) {
-                continue;
+            if ($enabled && $this->snippets[$name]['placement'] === $placement) {
+                $pieces[] = $this->renderSnippet($name);
             }
-            $pieces[] = $this->getView()->render($this->snippets[$name]['template'], $this->snippets[$name]['values']);
         }
 
         return implode(PHP_EOL, $pieces);
