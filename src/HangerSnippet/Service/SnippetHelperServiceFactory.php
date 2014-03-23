@@ -13,13 +13,13 @@ use HangerSnippet\View\Helper\SnippetHelper;
 class SnippetHelperServiceFactory implements FactoryInterface
 {
     /**
+     * Config Key
      * @var string
      */
     protected $configKey = 'hanger_snippet';
 
     /**
      * Create an appender helper service
-     *
      * @param ServiceLocatorInterface $serviceLocator
      * @return SnippetHelper
      */
@@ -43,11 +43,13 @@ class SnippetHelperServiceFactory implements FactoryInterface
 
         if (isset($snippetsConfig['snippets']) && is_array($snippetsConfig['snippets'])) {
 
-            $enableAll = isset($snippetsConfig['enable_all']) ? (bool) $snippetsConfig['enable_all'] : true; //enable all by default
+            $enableAll = isset($snippetsConfig['enable_all']) ?
+                (bool) $snippetsConfig['enable_all'] :
+                true;
 
             foreach ($snippetsConfig['snippets'] as $name => $snippetsConfig) {
 
-                $values = array();
+                $values = [];
 
                 //Retrive values from global config if a config key was provided
                 if (isset($snippetsConfig['config_key']) && isset($config[$snippetsConfig['config_key']])) {
