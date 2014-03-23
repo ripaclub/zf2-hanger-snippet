@@ -1,48 +1,143 @@
 <?php
-use HangerSnippetTest\View\Helper\SnippetHelper;
-use Zend\View\Renderer\PhpRenderer as View;
+
+namespace HangerSnippet\View\Helper;
+
+use Zend\View\Renderer\PhpRenderer;
+
+/**
+ * Class SnippetHelperTest
+ * @author Leonardo Grasso <me@leonardograsso.com>
+ * @author Lorenzo Fontana <fontanalorenzo@me.com>
+ */
 class SnippetHelperTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * The Helper
      * @var \HangerSnippet\View\Helper\SnippetHelper
      */
     public $helper;
 
     /**
-     * @var string
+     * Set Up
      */
-    public $basePath;
-
     protected function setUp()
     {
-        $this->basePath = __DIR__ . '/_files/modules';
-        $this->helper   = new \HangerSnippet\View\Helper\SnippetHelper();
-        $this->helper->appendSnippet('test', 'hanger-snippet/test', array('foo' => 'ABC'));
+        $this->helper = new SnippetHelper();
+        $view = new PhpRenderer();
+        $view->resolver()->addPath(__DIR__ . '/_files/modules');
+        $this->helper->setView($view);
     }
 
+    /**
+     * Tear Down
+     */
     public function tearDown()
     {
         unset($this->helper);
     }
 
-    public function testRender()
+    /**
+     * Test Append Snippet
+     */
+    public function testAppendSnippet()
     {
-        $view = new View();
-        $view->resolver()->addPath($this->basePath);
-        $this->helper->setView($view);
+        $this->helper->appendSnippet('appended', 'hanger-snippet/test', ['foo' => 'ABC']);
+        $this->assertCount(1, $this->helper->getSnippets());
+    }
 
-        //render one
-        $return = $this->helper->renderSnippet('test');
-        $this->assertContains('<script type="text/javascript">var foo = \'ABC\';</script>', $return);
+    /**
+     * Test Enable Snippet
+     */
+    public function testEnableSnippet()
+    {
+        $this->helper->appendSnippet('test', 'hanger-snippet/test', ['foo' => 'ABC']);
+        $this->helper->setEnabled('test');
+        $this->assertTrue($this->helper->getEnabledSnippets()['test']);
+    }
 
-        //render all
+    /**
+     * Test Disable Snippet
+     */
+    public function testDisableSnippet()
+    {
+        $this->helper->appendSnippet('test', 'hanger-snippet/test', ['foo' => 'ABC']);
+        $this->helper->setDisabled('test');
+        $this->assertFalse($this->helper->getEnabledSnippets()['test']);
+    }
+
+    /**
+     * @dataProvider snippetsProvider
+     */
+    public function testRender($name, $template, $values, $expected)
+    {
+        $this->helper->appendSnippet($name, $template, $values);
+        $return = $this->helper->renderSnippet($name);
+        $this->assertEquals($expected, $return);
+    }
+
+    /**
+     * Test Render All
+     */
+    public function testRenderAll()
+    {
+        $snippetExpected = [];
+        foreach ($this->snippetsProvider() as $snippet) {
+            $this->helper->appendSnippet($snippet[0], $snippet[1], $snippet[2]);
+            $snippetExpected[] = $snippet[3];
+        }
+        $expected = implode(PHP_EOL, $snippetExpected);
         $return = $this->helper->render();
-        $this->assertContains('<script type="text/javascript">var foo = \'ABC\';</script>', $return);
-
-        $this->assertSame($return, $this->helper->toString());
-        $this->assertSame($return, (string) $this->helper);
+        $this->assertEquals($expected, $return);
     }
 
 
+    /**
+     * Snippets Data Provider
+     * @return array
+     */
+    public function snippetsProvider()
+    {
+        $testSnippet = <<<HTML
+<script type="text/javascript">
+    <!--
+    var foo = 'abc';
+    -->
+</script>
+HTML;
+
+        $anotherTestSnippet = <<<HTML
+<script type="text/javascript">
+    <!--
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'FOOOOOOO', 'BAAAAAAAARRRRR');
+    ga('send', 'pageview');
+    -->
+</script>
+HTML;
+
+        return [
+            [
+                'test',
+                'hanger-snippet/test',
+                [
+                    'foo' => 'abc'
+                ],
+                $testSnippet
+            ],
+            [
+                'another',
+                'hanger-snippet/anothertest',
+                [
+                    'foo' => 'FOOOOOOO',
+                    'bar' => 'BAAAAAAAARRRRR'
+                ],
+                $anotherTestSnippet
+            ]
+        ];
+    }
 }

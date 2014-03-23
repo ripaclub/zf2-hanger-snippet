@@ -161,6 +161,24 @@ class SnippetHelper extends AbstractHelper
     }
 
     /**
+     * Get Snippets
+     * @return array
+     */
+    public function getSnippets()
+    {
+        return $this->snippets;
+    }
+
+    /**
+     * Get Enabled Snippets
+     * @return array
+     */
+    public function getEnabledSnippets()
+    {
+        return $this->enabledSnippets;
+    }
+
+    /**
      * Check if snippet exists
      * @param $name
      * @throws \HangerSnippet\Exception\InvalidArgumentException
