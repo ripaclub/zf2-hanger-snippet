@@ -6,7 +6,10 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\HelperPluginManager;
 use HangerSnippet\View\Helper\SnippetHelper;
 
-
+/**
+ * Class SnippetHelperServiceFactory
+ * @author Leonardo Grasso <me@leonardograsso.com>
+ */
 class SnippetHelperServiceFactory implements FactoryInterface
 {
     /**

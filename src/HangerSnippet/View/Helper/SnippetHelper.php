@@ -21,19 +21,22 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     use ServiceLocatorAwareTrait;
 
     /**
+     * Snippets
      * @var array
      */
-    protected $snippets = array();
+    protected $snippets = [];
 
     /**
+     * Enabled Snippets
      * @var array
      */
-    protected $enabledSnippets = array();
+    protected $enabledSnippets = [];
 
 
     /**
-     * @param string $name
-     * @param bool $enabled
+     * Set Enabled
+     * @param string    $name       The Snippet name
+     * @param bool      $enabled    The Snippet status
      * @throws InvalidArgumentException
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
@@ -47,7 +50,8 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     }
 
     /**
-     * @param string $enable
+     * Set Enable All
+     * @param bool $enable
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
     public function setEnableAll($enable = true)
@@ -59,25 +63,27 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     }
 
     /**
-     * @param string $name
-     * @param string $template
-     * @param array $values
-     * @param string $enable
+     * Append Snippet
+     * @param string    $name          The Snippet name
+     * @param string    $template      The Snippet template
+     * @param array     $values
+     * @param bool      $enable
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name, $template, array $values = array(), $enable = true)
+    public function appendSnippet($name, $template, array $values = [], $enable = true)
     {
-        $this->snippets[$name] = array(
+        $this->snippets[$name] = [
             'template' => $template,
             'values'   => $values,
-        );
+        ];
 
         $this->setEnabled($name, $enable);
         return $this;
     }
 
     /**
-     * @param string $name
+     * Render
+     * @param string $name  The Snippet name
      * @throws InvalidArgumentException
      * @return string
      */
@@ -89,10 +95,10 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
             if (!isset($snippets[$name])) {
                 throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
             }
-            $snippets = array($name => $snippets[$name]);
+            $snippets = [$name => $snippets[$name]];
         }
 
-        $pieces = array();
+        $pieces = [];
         foreach ($snippets as $name => $enabled) {
             if (!$enabled) {
                 continue;
@@ -103,12 +109,19 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
         return implode(PHP_EOL, $pieces);
     }
 
-
+    /**
+     * To String
+     * @return string
+     */
     public function toString()
     {
         return $this->render();
     }
 
+    /**
+     * To String
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
@@ -116,12 +129,10 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
 
     /**
      * View Helper Invoke
-     *
-     * @return string
+     * @return $this
      */
     public function __invoke()
     {
-       return $this;
+        return $this;
     }
-
 }
