@@ -1,9 +1,9 @@
 {
-    "name": "dmlab/zf2-hanger-snippet",
+    "name": "ripaclub/zf2-hanger-snippet",
     "type": "library",
     "description": "",
     "keywords": ["js", "javascript", "configurator", "sdk", "js", "appender", "snippet"],
-    "homepage": "https://github.com/dmlab/zf2-hanger-snippet",
+    "homepage": "https://github.com/ripaclub/zf2-hanger-snippet",
     "license": "BSD-2-Clause",
     "authors": [
         {

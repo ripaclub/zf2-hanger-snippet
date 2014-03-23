@@ -1,4 +1,4 @@
-Copyright (c) 2014, Digital Magics Lab
+Copyright (c) 2014, Ripa Club
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
