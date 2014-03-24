@@ -146,6 +146,22 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $invoke->getSnippets());
     }
 
+    /**
+     * @expectedException \HangerSnippet\Exception\InvalidArgumentException
+     */
+    public function testInvalidArgumentException()
+    {
+        $this->helper->renderSnippet("invalidSnippet");
+    }
+
+    /**
+     * @expectedException \HangerSnippet\Exception\InvalidArgumentException
+     */
+    public function testSetEnabled()
+    {
+        $this->helper->setEnabled("invalidSnippet");
+    }
+
 
     /**
      * Snippets Data Provider
