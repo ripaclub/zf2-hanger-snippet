@@ -1,5 +1,7 @@
 # HangerSnippet
 
+Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
+
 This ZF2 Module aims to provide a fast way to configure and append code snippeds for JS libraries.
 
 ## Rationale
