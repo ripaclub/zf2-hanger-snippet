@@ -12,7 +12,7 @@
         stopOnFailure="false"
 
         >
-    <testsuite name="ZF2JsAppender tests">
+    <testsuite name="HangerSnippet tests">
         <directory>./tests</directory>
     </testsuite>
     <filter>

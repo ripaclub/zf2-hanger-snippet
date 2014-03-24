@@ -1,5 +1,5 @@
 <?php
-namespace HangerSnippetTest\Service;
+namespace HangerSnippet\Service;
 
 use Zend\View\HelperPluginManager;
 use Zend\ServiceManager\ServiceManager;
@@ -22,8 +22,7 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
     private $serviceManager;
 
     /**
-     *
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -56,6 +55,9 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->viewHelperPluginManager->setServiceLocator($this->serviceManager);
     }
 
+    /**
+     * Test Create Service
+     */
     public function testCreateService()
     {
         $helper = $this->viewHelperPluginManager->get('hangerSnippet');

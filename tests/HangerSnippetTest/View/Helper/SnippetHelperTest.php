@@ -19,7 +19,7 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     public $helper;
 
     /**
-     * Set Up
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -30,7 +30,7 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tear Down
+     * {@inheritdoc}
      */
     public function tearDown()
     {
