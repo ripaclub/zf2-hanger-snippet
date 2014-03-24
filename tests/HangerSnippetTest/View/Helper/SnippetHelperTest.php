@@ -57,6 +57,38 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Enable All Snippets
+     */
+    public function testEnableAllSnippets()
+    {
+        foreach ($this->snippetsProvider() as $snippet) {
+            $this->helper->appendSnippet($snippet[0], $snippet[1], $snippet[2]);
+        }
+        $this->helper->setEnableAll();
+
+
+        foreach ($this->snippetsProvider() as $snippet) {
+            $this->assertTrue($this->helper->getEnabledSnippets()[$snippet[0]]);
+        }
+    }
+
+    /**
+     * Test Disable All Snippets
+     */
+    public function testDisableAllSnippets()
+    {
+        foreach ($this->snippetsProvider() as $snippet) {
+            $this->helper->appendSnippet($snippet[0], $snippet[1], $snippet[2]);
+        }
+        $this->helper->setDisableAll();
+
+
+        foreach ($this->snippetsProvider() as $snippet) {
+            $this->assertFalse($this->helper->getEnabledSnippets()[$snippet[0]]);
+        }
+    }
+
+    /**
      * Test Disable Snippet
      */
     public function testDisableSnippet()
@@ -89,6 +121,29 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
         $expected = implode(PHP_EOL, $snippetExpected);
         $return = $this->helper->render();
         $this->assertEquals($expected, $return);
+    }
+
+
+    /**
+     * @dataProvider snippetsProvider
+     */
+    public function testToString($name, $template, $values, $expected)
+    {
+        $this->helper->appendSnippet($name, $template, $values);
+        $return = $this->helper->toString();
+        $this->assertEquals($expected, $return);
+    }
+
+
+    /**
+     * @dataProvider snippetsProvider
+     */
+    public function testInvoke($name, $template, $values, $expected)
+    {
+        $this->helper->appendSnippet($name, $template, $values);
+        $invoke = $this->helper->__invoke();
+        $this->assertInstanceOf('\HangerSnippet\View\Helper\SnippetHelper', $invoke);
+        $this->assertCount(1, $invoke->getSnippets());
     }
 
 

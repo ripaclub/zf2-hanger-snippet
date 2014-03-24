@@ -139,7 +139,7 @@ class SnippetHelper extends AbstractHelper
      */
     public function toString()
     {
-        return $this->render();
+        return $this->__toString();
     }
 
     /**
