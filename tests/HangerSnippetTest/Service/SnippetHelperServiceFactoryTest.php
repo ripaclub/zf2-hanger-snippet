@@ -1,10 +1,14 @@
 <?php
-namespace HangerSnippetTest\Service;
+namespace HangerSnippet\Service;
 
 use Zend\View\HelperPluginManager;
-use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 
+/**
+ * Class SnippetHelperServiceFactoryTest
+ * @author Leonardo Grasso <me@leonardograsso.com>
+ * @author Lorenzo Fontana <fontanalorenzo@me.com>
+ */
 class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -18,41 +22,45 @@ class SnippetHelperServiceFactoryTest extends \PHPUnit_Framework_TestCase
     private $serviceManager;
 
     /**
-     *
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * {@inheritdoc}
      */
     protected function setUp()
     {
 
-        $this->serviceManager =  new ServiceManager();
+        $this->serviceManager = new ServiceManager();
 
-        $this->serviceManager->setService('Config', array(
-            'ga' => array(
+        $this->serviceManager->setService('Config', [
+            'ga'             => [
                 'monitoring_id' => 'UA-XXXXXXXX-X',
                 'domain'        => 'yourdomain.com'
-            ),
+            ],
 
-            'hanger_snippet' => array(
-                'snippets' => array(
-                    'google-analytics' => array(
+            'hanger_snippet' => [
+                'snippets' => [
+                    'google-analytics' => [
                         'config_key' => 'ga', //the config node in the global config, if any
-                        'values' => array(
+                        'values'     => [
                             //other values for the template
-                        ),
-                    )
-                )
-            ),
-        ));
+                        ],
+                    ]
+                ]
+            ],
+        ]);
 
         $this->viewHelperPluginManager = new HelperPluginManager();
-        $this->viewHelperPluginManager->setFactory('hangerSnippet', 'HangerSnippet\Service\SnippetHelperServiceFactory');
+        $this->viewHelperPluginManager->setFactory(
+            'hangerSnippet',
+            'HangerSnippet\Service\SnippetHelperServiceFactory'
+        );
         $this->viewHelperPluginManager->setServiceLocator($this->serviceManager);
     }
 
+    /**
+     * Test Create Service
+     */
     public function testCreateService()
     {
         $helper = $this->viewHelperPluginManager->get('hangerSnippet');
         $this->assertInstanceOf('\HangerSnippet\View\Helper\SnippetHelper', $helper);
     }
-
 }

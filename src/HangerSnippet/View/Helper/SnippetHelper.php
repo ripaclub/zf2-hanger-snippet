@@ -2,12 +2,8 @@
 
 namespace HangerSnippet\View\Helper;
 
-use Traversable;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\View\Helper\AbstractHelper;
-use Zend\Stdlib\ArrayUtils;
-use HangerSnippet\Exception\DomainException;
 use HangerSnippet\Exception\InvalidArgumentException;
 
 /**
@@ -15,10 +11,8 @@ use HangerSnippet\Exception\InvalidArgumentException;
  * @author Lorenzo Fontana <fontanalorenzo@me.com>
  * @author Leonardo Grasso <me@leonardograsso.com>
  */
-class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterface
+class SnippetHelper extends AbstractHelper
 {
-
-    use ServiceLocatorAwareTrait;
 
     /**
      * Snippets
@@ -35,43 +29,63 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
 
     /**
      * Set Enabled
-     * @param string    $name       The Snippet name
-     * @param bool      $enabled    The Snippet status
-     * @throws InvalidArgumentException
+     * @param string $name The Snippet name
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function setEnabled($name, $enabled = true)
+    public function setEnabled($name)
     {
-        if (!isset($this->snippets[$name])) {
-            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
-        }
-        $this->enabledSnippets[$name] = (bool) $enabled;
+        $this->checkIfSnippetExists($name);
+        $this->enabledSnippets[$name] = true;
+        return $this;
+    }
+
+
+    /**
+     * Set Disabled
+     * @param string $name The Snippet name
+     * @return \HangerSnippet\View\Helper\SnippetHelper
+     */
+    public function setDisabled($name)
+    {
+        $this->checkIfSnippetExists($name);
+        $this->enabledSnippets[$name] = false;
         return $this;
     }
 
     /**
      * Set Enable All
-     * @param bool $enable
-     * @return \HangerSnippet\View\Helper\SnippetHelper
+     * @return $this
      */
-    public function setEnableAll($enable = true)
+    public function setEnableAll()
     {
         foreach ($this->snippets as $name => $config) {
-            $this->enabledSnippets[$name] = (bool) $name;
+            $this->setEnabled($name);
+        }
+        return $this;
+    }
+
+    /**
+     * Set Disable All
+     * @return $this
+     */
+    public function setDisableAll()
+    {
+        foreach ($this->snippets as $name => $config) {
+            $this->setDisabled($name);
         }
         return $this;
     }
 
     /**
      * Append Snippet
-     * @param string    $name          The Snippet name
-     * @param string    $template      The Snippet template
-     * @param array     $values
+     * @param string      $name     The Snippet name
+     * @param string      $template The Snippet template
+     * @param array       $values
      * @param string|null $placement
-     * @param bool      $enable
+     * @param bool        $enabled
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name, $template, array $values = [], $placement = null, $enable = true)
+    public function appendSnippet($name, $template, array $values = [], $placement = null, $enabled = true)
     {
         $this->snippets[$name] = [
             'placement' => $placement,
@@ -79,7 +93,7 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
             'values'    => $values,
         ];
 
-        $this->setEnabled($name, $enable);
+        $this->setEnabled($name, $enabled);
         return $this;
     }
 
@@ -144,5 +158,35 @@ class SnippetHelper extends AbstractHelper implements ServiceLocatorAwareInterfa
     public function __invoke()
     {
         return $this;
+    }
+
+    /**
+     * Get Snippets
+     * @return array
+     */
+    public function getSnippets()
+    {
+        return $this->snippets;
+    }
+
+    /**
+     * Get Enabled Snippets
+     * @return array
+     */
+    public function getEnabledSnippets()
+    {
+        return $this->enabledSnippets;
+    }
+
+    /**
+     * Check if snippet exists
+     * @param $name
+     * @throws \HangerSnippet\Exception\InvalidArgumentException
+     */
+    protected function checkIfSnippetExists($name)
+    {
+        if (!isset($this->snippets[$name])) {
+            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+        }
     }
 }
