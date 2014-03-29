@@ -1,5 +1,35 @@
+filter:
+    paths: [src/*]
+    excluded_paths: [vendor/*, tests/*]
+
+before_commands:
+    - "composer install --dev --prefer-source"
+
 tools:
-    php_pdepend: true
-    php_analyzer: true
     external_code_coverage:
-      timeout: 600
+        timeout: 1800
+    php_code_sniffer:
+        enabled: true
+        config:
+            standard: PSR2
+        filter:
+            paths: ["src"]
+    php_cpd:
+        enabled: true
+        excluded_dirs: ["tests", "vendor"]
+    php_loc:
+        enabled: true
+        excluded_dirs: ["tests", "vendor"]
+    php_mess_detector:
+        enabled: true
+        command: vendor/bin/phpmd
+        filter:
+            paths: ["src"]
+    php_pdepend:
+        enabled: true
+        excluded_dirs: ["tests", "vendor"]
+    php_analyzer:
+        enabled: true
+        filter:
+            paths: ["src/*"]
+    sensiolabs_security_checker: true
