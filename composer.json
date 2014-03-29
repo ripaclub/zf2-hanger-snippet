@@ -1,0 +1,35 @@
+{
+    "name": "ripaclub/zf2-hanger-snippet",
+    "type": "library",
+    "description": "",
+    "keywords": ["js", "javascript", "configurator", "sdk", "js", "appender", "snippet"],
+    "homepage": "https://github.com/ripaclub/zf2-hanger-snippet",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Fontana Lorenzo",
+            "email": "fontanalorenzo@me.com",
+            "homepage": "https://github.com/fontanalorenzo"
+        },
+        {
+            "name": "Leonardo Grasso",
+            "email": "me@leonardograsso.com",
+            "homepage": "https://github.com/leogr"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "zendframework/zendframework": "2.*",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "HangerSnippet": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
