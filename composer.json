@@ -2,7 +2,7 @@
     "name": "ripaclub/zf2-hanger-snippet",
     "type": "library",
     "description": "",
-    "keywords": ["js", "javascript", "configurator", "sdk", "js", "appender", "snippet"],
+    "keywords": ["zf2", "hanger", "snippets", "js", "appender", "snippet"],
     "homepage": "https://github.com/ripaclub/zf2-hanger-snippet",
     "license": "BSD-2-Clause",
     "authors": [
@@ -18,10 +18,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=5.4",
+        "zendframework/zend-view": "2.*",
+        "zendframework/zend-servicemanager": "2.*"
     },
     "require-dev": {
-        "zendframework/zendframework": "2.*",
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
