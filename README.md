@@ -1,6 +1,8 @@
 # HangerSnippet
+[![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=master)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
+[![Latest Stable Version](https://poser.pugx.org/ripaclub/zf2-hanger-snippet/version.png)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
+[![License](https://poser.pugx.org/ripaclub/zf2-hanger-snippet/license.png)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
 
-Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
 
 This ZF2 Module aims to provide a fast way to configure and append code snippeds for JS libraries.
 
@@ -9,6 +11,18 @@ This ZF2 Module aims to provide a fast way to configure and append code snippeds
 Often happens to have to set up a Javascript library and many times it would be nice to have a place where you can configure them
 and perhaps with the ability to override the configuration rather than throw them in the view.
 
+## Installation
+
+### Via Composer
+Add `ripaclub/zf2-hanger-snippet` to your composer.json
+
+```json
+{
+   "require": {
+       "ripaclub/zf2-hanger-snippet": "v1.0.0"
+   }
+}
+```
 
 ## Setup
 
@@ -94,3 +108,6 @@ return array(
     ),
 );
 ```
+
+
+Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
