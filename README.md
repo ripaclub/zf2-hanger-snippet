@@ -112,3 +112,5 @@ return array(
 
 
 Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
+
+[![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-hanger-snippet)](https://github.com/igrigorik/ga-beacon)
