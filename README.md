@@ -20,7 +20,7 @@ Add `ripaclub/zf2-hanger-snippet` to your composer.json
 ```json
 {
    "require": {
-       "ripaclub/zf2-hanger-snippet": "v1.0.0"
+       "ripaclub/zf2-hanger-snippet": "1.0.1"
    }
 }
 ```
