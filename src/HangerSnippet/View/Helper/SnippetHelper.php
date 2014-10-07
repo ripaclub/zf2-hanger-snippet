@@ -78,19 +78,23 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Append Snippet
-     * @param string      $name     The Snippet name
-     * @param string      $template The Snippet template
-     * @param array       $values
+     * @param string $name The Snippet name
+     * @param string $template The Snippet template
+     * @param array $values
      * @param string|null $placement
-     * @param bool        $enabled
+     * @param bool $enabled
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name, $template, array $values = [], $placement = null, $enabled = true)
+    public function appendSnippet($name,
+                                  $template,
+                                  array $values = [],
+                                  $placement = null,
+                                  $enabled = true)
     {
         $this->snippets[$name] = [
             'placement' => $placement,
-            'template'  => $template,
-            'values'    => $values,
+            'template' => $template,
+            'values' => $values,
         ];
 
         $this->setEnabled($name, $enabled);
@@ -107,14 +111,23 @@ class SnippetHelper extends AbstractHelper
     public function renderSnippet($name)
     {
         if (!isset($this->snippets[$name])) {
-            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Cannot find a snippet with name '%s'",
+                    $name
+                )
+            );
         }
 
-        return $this->getView()->render($this->snippets[$name]['template'], $this->snippets[$name]['values']);
+        return $this->getView()->render(
+            $this->snippets[$name]['template'],
+            $this->snippets[$name]['values']
+        );
     }
 
     /**
      * Render
+     *
      * @param string $placement
      * @throws InvalidArgumentException
      * @return string
@@ -186,7 +199,10 @@ class SnippetHelper extends AbstractHelper
     protected function checkIfSnippetExists($name)
     {
         if (!isset($this->snippets[$name])) {
-            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+            throw new InvalidArgumentException(
+                "Cannot find a snippet with name '%s'",
+                $name
+            );
         }
     }
 }
