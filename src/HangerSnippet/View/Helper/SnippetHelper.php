@@ -135,8 +135,8 @@ class SnippetHelper extends AbstractHelper
         $snippets = $this->getEnabledSnippets();
 
         $pieces = [];
-        foreach ($snippets as $name => $enabled) {
-            if ($enabled && $this->snippets[$name]['placement'] === $placement) {
+        foreach ($snippets as $name => $snippet) {
+            if ($snippet['placement'] === $placement) {
                 $pieces[] = $this->renderSnippet($name);
             }
         }
