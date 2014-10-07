@@ -8,6 +8,7 @@ use HangerSnippet\Exception\InvalidArgumentException;
 
 /**
  * Class SnippetHelper
+ *
  * @author Lorenzo Fontana <fontanalorenzo@me.com>
  * @author Leonardo Grasso <me@leonardograsso.com>
  */
@@ -16,12 +17,14 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Snippets
+     *
      * @var array
      */
     protected $snippets = [];
 
     /**
      * Enabled Snippets
+     *
      * @var array
      */
     protected $enabledSnippets = [];
@@ -29,19 +32,22 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Set Enabled
+     *
      * @param string $name The Snippet name
+     * @param bool $enabled Wheter to enable or disable the snippet
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function setEnabled($name)
+    public function setEnabled($name, $enabled = true)
     {
         $this->checkIfSnippetExists($name);
-        $this->enabledSnippets[$name] = true;
+        $this->enabledSnippets[$name] = $enabled;
         return $this;
     }
 
 
     /**
      * Set Disabled
+     *
      * @param string $name The Snippet name
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
@@ -54,6 +60,7 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Set Enable All
+     *
      * @return $this
      */
     public function setEnableAll()
@@ -78,6 +85,7 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Append Snippet
+     *
      * @param string $name The Snippet name
      * @param string $template The Snippet template
      * @param array $values
@@ -200,8 +208,10 @@ class SnippetHelper extends AbstractHelper
     {
         if (!isset($this->snippets[$name])) {
             throw new InvalidArgumentException(
+                sprintf(
                 "Cannot find a snippet with name '%s'",
                 $name
+                )
             );
         }
     }
