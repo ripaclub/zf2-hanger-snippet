@@ -101,8 +101,10 @@ return array(
             'facebook-sdk' => array(
                 'config_key' => 'facebook', //the config node in the global config, if any
                 'values' => array(
+                    'async' => false,
                     'status' => true,
                     'xfbml'  => true,
+                    'version' => 'v2.0',
                 ),
             )
         )

@@ -8,6 +8,7 @@ use HangerSnippet\Exception\InvalidArgumentException;
 
 /**
  * Class SnippetHelper
+ *
  * @author Lorenzo Fontana <fontanalorenzo@me.com>
  * @author Leonardo Grasso <me@leonardograsso.com>
  */
@@ -16,44 +17,41 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Snippets
+     *
      * @var array
      */
     protected $snippets = [];
 
     /**
-     * Enabled Snippets
-     * @var array
-     */
-    protected $enabledSnippets = [];
-
-
-    /**
      * Set Enabled
+     *
      * @param string $name The Snippet name
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
     public function setEnabled($name)
     {
         $this->checkIfSnippetExists($name);
-        $this->enabledSnippets[$name] = true;
+        $this->snippets[$name]['enabled'] = true;
         return $this;
     }
 
 
     /**
      * Set Disabled
+     *
      * @param string $name The Snippet name
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
     public function setDisabled($name)
     {
         $this->checkIfSnippetExists($name);
-        $this->enabledSnippets[$name] = false;
+        $this->snippets[$name]['enabled'] = false;
         return $this;
     }
 
     /**
      * Set Enable All
+     *
      * @return $this
      */
     public function setEnableAll()
@@ -78,22 +76,26 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Append Snippet
-     * @param string      $name     The Snippet name
-     * @param string      $template The Snippet template
-     * @param array       $values
+     *
+     * @param string $name The Snippet name
+     * @param string $template The Snippet template
+     * @param array $values
      * @param string|null $placement
-     * @param bool        $enabled
+     * @param bool $enabled
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name, $template, array $values = [], $placement = null, $enabled = true)
+    public function appendSnippet($name,
+                                  $template,
+                                  array $values = [],
+                                  $placement = null,
+                                  $enabled = true)
     {
         $this->snippets[$name] = [
             'placement' => $placement,
-            'template'  => $template,
-            'values'    => $values,
+            'template' => $template,
+            'values' => $values,
+            'enabled' => $enabled
         ];
-
-        $this->setEnabled($name, $enabled);
         return $this;
     }
 
@@ -107,25 +109,34 @@ class SnippetHelper extends AbstractHelper
     public function renderSnippet($name)
     {
         if (!isset($this->snippets[$name])) {
-            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Cannot find a snippet with name '%s'",
+                    $name
+                )
+            );
         }
 
-        return $this->getView()->render($this->snippets[$name]['template'], $this->snippets[$name]['values']);
+        return $this->getView()->render(
+            $this->snippets[$name]['template'],
+            $this->snippets[$name]['values']
+        );
     }
 
     /**
      * Render
+     *
      * @param string $placement
      * @throws InvalidArgumentException
      * @return string
      */
     public function render($placement = null)
     {
-        $snippets = $this->enabledSnippets;
+        $snippets = $this->getEnabledSnippets();
 
         $pieces = [];
-        foreach ($snippets as $name => $enabled) {
-            if ($enabled && $this->snippets[$name]['placement'] === $placement) {
+        foreach ($snippets as $name => $snippet) {
+            if ($snippet['placement'] === $placement) {
                 $pieces[] = $this->renderSnippet($name);
             }
         }
@@ -135,6 +146,7 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * To String
+     *
      * @return string
      */
     public function toString()
@@ -153,6 +165,7 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * View Helper Invoke
+     *
      * @return $this
      */
     public function __invoke()
@@ -162,6 +175,7 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Get Snippets
+     *
      * @return array
      */
     public function getSnippets()
@@ -171,11 +185,27 @@ class SnippetHelper extends AbstractHelper
 
     /**
      * Get Enabled Snippets
+     *
      * @return array
      */
     public function getEnabledSnippets()
     {
-        return $this->enabledSnippets;
+        return array_filter($this->getSnippets(), function ($snippet) {
+            return $snippet['enabled'];
+        });
+    }
+
+
+    /**
+     * Get Disabled Snippets
+     *
+     * @return array
+     */
+    public function getDisabledSnippets()
+    {
+        return array_filter($this->getSnippets(), function ($snippet) {
+            return !$snippet['enabled'];
+        });
     }
 
     /**
@@ -186,7 +216,12 @@ class SnippetHelper extends AbstractHelper
     protected function checkIfSnippetExists($name)
     {
         if (!isset($this->snippets[$name])) {
-            throw new InvalidArgumentException("Cannot find a snippet with name '{$name}'");
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Cannot find a snippet with name '%s'",
+                    $name
+                )
+            );
         }
     }
 }

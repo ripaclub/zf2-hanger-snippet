@@ -44,6 +44,17 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->appendSnippet('appended', 'hanger-snippet/test', ['foo' => 'ABC']);
         $this->assertCount(1, $this->helper->getSnippets());
+        $this->assertCount(1, $this->helper->getEnabledSnippets());
+        $this->assertEmpty($this->helper->getDisabledSnippets());
+    }
+
+    /**
+     * Test Append Snippet
+     */
+    public function testAppendSnippetWithPlacement()
+    {
+        $this->helper->appendSnippet('appended', 'hanger-snippet/test', ['foo' => 'ABC'], 'example');
+        $this->assertCount(1, $this->helper->getSnippets());
     }
 
     /**
@@ -53,7 +64,7 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->appendSnippet('test', 'hanger-snippet/test', ['foo' => 'ABC']);
         $this->helper->setEnabled('test');
-        $this->assertTrue($this->helper->getEnabledSnippets()['test']);
+        $this->assertArrayHasKey('test', $this->helper->getEnabledSnippets());
     }
 
     /**
@@ -68,7 +79,8 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
 
 
         foreach ($this->snippetsProvider() as $snippet) {
-            $this->assertTrue($this->helper->getEnabledSnippets()[$snippet[0]]);
+            $this->assertArrayHasKey($snippet[0], $this->helper->getEnabledSnippets());
+            $this->assertArrayNotHasKey($snippet[0], $this->helper->getDisabledSnippets());
         }
     }
 
@@ -84,7 +96,8 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
 
 
         foreach ($this->snippetsProvider() as $snippet) {
-            $this->assertFalse($this->helper->getEnabledSnippets()[$snippet[0]]);
+            $this->assertArrayHasKey($snippet[0], $this->helper->getDisabledSnippets());
+            $this->assertArrayNotHasKey($snippet[0], $this->helper->getEnabledSnippets());
         }
     }
 
@@ -94,8 +107,11 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     public function testDisableSnippet()
     {
         $this->helper->appendSnippet('test', 'hanger-snippet/test', ['foo' => 'ABC']);
+        $this->assertArrayHasKey('test', $this->helper->getEnabledSnippets());
+        $this->assertArrayNotHasKey('test', $this->helper->getDisabledSnippets());
         $this->helper->setDisabled('test');
-        $this->assertFalse($this->helper->getEnabledSnippets()['test']);
+        $this->assertArrayNotHasKey('test', $this->helper->getEnabledSnippets());
+        $this->assertArrayHasKey('test', $this->helper->getDisabledSnippets());
     }
 
     /**

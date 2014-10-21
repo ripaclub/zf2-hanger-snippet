@@ -8,6 +8,7 @@ use HangerSnippet\View\Helper\SnippetHelper;
 
 /**
  * Class SnippetHelperServiceFactory
+ *
  * @author Leonardo Grasso <me@leonardograsso.com>
  * @author Lorenzo Fontana <fontanalorenzo@me.com>
  */
