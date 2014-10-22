@@ -83,8 +83,8 @@ class SnippetHelperServiceFactory implements FactoryInterface
             }
 
             // Merge provided values, if any
-            if (isset($snippetsConfig['data'])) {
-                $values = array_merge_recursive($values, $snippetsConfig['data']);
+            if (isset($snippetsConfig['values'])) {
+                $values = array_merge_recursive($values, $snippetsConfig['values']);
             }
 
             $snippetHelper->appendSnippet(
