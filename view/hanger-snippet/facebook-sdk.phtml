@@ -16,7 +16,7 @@ if (!isset($this->locale)) {
             appId: '<?php echo $this->appId?>',
             status: <?php echo (isset($this->status) && $this->status ? 'true' : 'false')?>,
             xfbml: <?php echo (isset($this->xfbml) && $this->xfbml ? 'true' : 'false')?>,
-            version: <?php echo (isset($this->version) ? $this->version : '')?>
+            version: '<?php echo (isset($this->version) ? $this->version : '')?>'
         });
         <?php echo isset($this->fbAsynchInitHook) ? $this->fbAsynchInitHook : ''; ?>
     };
