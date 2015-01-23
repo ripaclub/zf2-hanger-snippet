@@ -104,7 +104,7 @@ return array(
                     'async' => false,
                     'status' => true,
                     'xfbml'  => true,
-                    'version' => 'v2.0',
+                    'version' => 'v2.2',
                 ),
             )
         )
