@@ -70,7 +70,12 @@ return array(
 return array(
     'ga' => array(
         'monitoring_id' => 'UA-XXXXXXXX-X',
-        'domain'        => 'yourdomain.com'
+        'domain'        => 'yourdomain.com',
+        'options' => [
+            'siteSpeedSampleRate' => 1,
+            'sampleRate' => 100
+            //check https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
+        ]
      ),
 
     'hanger_snippet' => array(
