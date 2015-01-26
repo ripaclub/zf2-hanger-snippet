@@ -4,8 +4,27 @@
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', '<?php echo $this->monitoring_id;?>', '<?php echo $this->domain;?>');
+    <?php
+    if($this->options) :
+    //create method with parameters
+    ?>
+    ga('create', '<?= $this->monitoring_id; ?>', {
+        'cookieDomain': '<?= $this->domain; ?>'<?php
+        foreach($this->options as $option => $value):
+            echo ',' . PHP_EOL;
+            ?>
+        '<?= $option; ?>': '<?= $value ?>'
+        <?php
+    endforeach;
+    ?>});
+    <?php
+    else :
+    //create method without parameters
+    ?>
+    ga('create', '<?= $this->monitoring_id; ?>', '<?= $this->domain; ?>');
+    <?php
+    endif;
+    ?>
     ga('send', 'pageview');
     -->
 </script>

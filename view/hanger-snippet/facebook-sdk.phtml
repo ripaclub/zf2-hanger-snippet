@@ -13,12 +13,12 @@ if (!isset($this->locale)) {
     <!--
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '<?php echo $this->appId?>',
-            status: <?php echo (isset($this->status) && $this->status ? 'true' : 'false')?>,
-            xfbml: <?php echo (isset($this->xfbml) && $this->xfbml ? 'true' : 'false')?>,
-            version: '<?php echo (isset($this->version) ? $this->version : '')?>'
+            appId: '<?= $this->appId; ?>',
+            status: <?= (isset($this->status) && $this->status ? 'true' : 'false'); ?>,
+            xfbml: <?= (isset($this->xfbml) && $this->xfbml ? 'true' : 'false'); ?>,
+            version: '<?= (isset($this->version) ? $this->version : ''); ?>'
         });
-        <?php echo isset($this->fbAsynchInitHook) ? $this->fbAsynchInitHook : ''; ?>
+        <?= isset($this->fbAsynchInitHook) ? $this->fbAsynchInitHook : ''; ?>
     };
 
     (function (d, s, id) {
@@ -28,8 +28,8 @@ if (!isset($this->locale)) {
         }
         js = d.createElement(s);
         js.id = id;
-        js.async = <?php echo (isset($this->async) && $this->async ? 'true' : 'false')?>;
-        js.src = "//connect.facebook.net/<?php echo $this->locale?>/sdk.js";
+        js.async = <?= (isset($this->async) && $this->async ? 'true' : 'false'); ?>;
+        js.src = "//connect.facebook.net/<?= $this->locale; ?>/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     -->

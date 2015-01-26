@@ -1,9 +1,9 @@
 # HangerSnippet
-[![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=master)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
-[![Latest Stable Version](https://poser.pugx.org/ripaclub/zf2-hanger-snippet/version.png)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
-[![License](https://poser.pugx.org/ripaclub/zf2-hanger-snippet/license.png)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet/badges/quality-score.png?s=49203bee92a5f7076db32e2a5427a97f416a4894)](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet/)
-[![Code Coverage](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet/badges/coverage.png?s=60b6fe5e6c6ce65ddc23ecd98cf9e8c988fc4f1f)](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet/)
+[![Travis](https://img.shields.io/travis/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
+[![Packagist](https://img.shields.io/packagist/v/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
+[![License](https://img.shields.io/packagist/l/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://github.com/ripaclub/zf2-hanger-snippet/blob/master/LICENSE.txt)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet)
+[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://scrutinizer-ci.com/g/ripaclub/zf2-hanger-snippet)
 
 This ZF2 Module aims to provide a fast way to configure and append code snippeds for JS libraries.
 
@@ -70,7 +70,12 @@ return array(
 return array(
     'ga' => array(
         'monitoring_id' => 'UA-XXXXXXXX-X',
-        'domain'        => 'yourdomain.com'
+        'domain'        => 'yourdomain.com',
+        'options' => [
+            'siteSpeedSampleRate' => 1,
+            'sampleRate' => 100
+            //check https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
+        ]
      ),
 
     'hanger_snippet' => array(
@@ -104,7 +109,7 @@ return array(
                     'async' => false,
                     'status' => true,
                     'xfbml'  => true,
-                    'version' => 'v2.0',
+                    'version' => 'v2.2',
                 ),
             )
         )

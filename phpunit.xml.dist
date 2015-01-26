@@ -1,7 +1,7 @@
-<phpunit bootstrap="tests/Bootstrap.php" colors="true" verbose="true">
+<phpunit bootstrap="tests/bootstrap.php" colors="true" verbose="true">
     <testsuites>
         <testsuite name="Hanger Snippet Test Suite">
-            <directory>tests/HangerSnippetTest</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>

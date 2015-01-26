@@ -1,7 +1,7 @@
 <?php
+namespace HangerSnippetTest\View\Helper;
 
-namespace HangerSnippet\View\Helper;
-
+use HangerSnippet\View\Helper\SnippetHelper;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
