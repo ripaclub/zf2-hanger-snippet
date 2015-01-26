@@ -1,5 +1,5 @@
 <?php
-namespace HangerSnippet\Service;
+namespace HangerSnippetTest\Service;
 
 use Zend\View\HelperPluginManager;
 use Zend\ServiceManager\ServiceManager;
