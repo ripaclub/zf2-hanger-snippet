@@ -1,5 +1,5 @@
 <?php
-$query = http_build_query($this->parameters);
+$query = http_build_query((array) $this->parameters);
 $queryString = !empty($query) ? '?' . $query : '';
 ?>
 <script src="<?= $this->api . $queryString ?>" async defer></script>
