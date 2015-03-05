@@ -67,28 +67,28 @@ return array(
 **In your configuration**
 
 ```php
-return array(
-    'ga' => array(
+return [
+    'ga' => [
         'monitoring_id' => 'UA-XXXXXXXX-X',
         'domain'        => 'yourdomain.com',
         'options' => [
             'siteSpeedSampleRate' => 1,
             'sampleRate' => 100
-            //check https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
-        ]
-     ),
+            // check https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
+        ],
+    ],
 
-    'hanger_snippet' => array(
-        'snippets' => array(
-            'google-analytics' => array(
-                'config_key' => 'ga', //the config node in the global config, if any
-                'values' => array(
-                    //other values for the template
-                ),
-            )
-        )
-    ),
-);
+    'hanger_snippet' => [
+        'snippets' => [
+            'google-analytics' => [
+                'config_key' => 'ga', // the config node in the global config, if any
+                'values' => [
+                    // other values for the template
+                ],
+            ],
+        ],
+    ],
+];
 ```
 
 ### Facebook JavaScript SDK
@@ -96,27 +96,74 @@ return array(
 **In your configuration**
 
 ```php
-return array(
-    'facebook' => array(
-           'appId' => '....',
-    ),
+return [
+    'facebook' => [
+           'appId' => '...',
+    ],
 
-    'hanger_snippet' => array(
-        'snippets' => array(
-            'facebook-sdk' => array(
-                'config_key' => 'facebook', //the config node in the global config, if any
-                'values' => array(
+    'hanger_snippet' => [
+        'snippets' => [
+            'facebook-sdk' => [
+                'config_key' => 'facebook', // the config node in the global config, if any
+                'values' => [
                     'async' => false,
                     'status' => true,
                     'xfbml'  => true,
                     'version' => 'v2.2',
-                ),
-            )
-        )
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];
 ```
 
+### Google ReCaptcha 2.0
+
+**In your configuration**
+
+```php
+return [
+    'g-recaptcha2.0' => [
+        'api' => 'https://www.google.com/recaptcha/api.js'
+        // Optional API parameters - see https://developers.google.com/recaptcha/docs/display
+        'parameters' => [
+            'render' => 'onload',
+            // 'hl' => '...',
+            // 'onload' => '...',
+        ],
+    ],
+    
+    'hanger_snippet' => [
+        'snippets' => [
+            'google-recaptcha2.0' => [
+                'config_key' => 'g-recaptcha2.0', // the config node in the global config, if any
+                'values' => [
+                    'sitekey' => '',
+                    // Optional configurations - see https://developers.google.com/recaptcha/docs/display
+                    'theme' => 'light',
+                    'type' => 'image',
+                    'callback' => '...',
+                    'expiredCallback' => '...'
+                ],
+            ],
+        ],
+    ],
+];
+```
+
+The placement of Google ReCaptcha snippet, unlike the others, needs to be specified (it can not simply be appended to the page).
+
+To place this snippet where we need it we can do:
+
+```php
+echo $this->hangerSnippet()->render('google-recaptcha2.0');
+```
+
+##### NOTE
+
+The string `google-recaptcha2.0` is the default name of the placement for this snippet (see `module.config.php).
+
+---
 
 Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
 

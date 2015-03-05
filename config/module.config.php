@@ -11,4 +11,11 @@ return [
             'hanger-snippet' => __DIR__ . '/../view',
         ],
     ],
+    'hanger_snippet' => [
+        'snippets' => [
+            'google-recaptcha2.0' => [
+                'placement' => 'google-recaptcha2.0'
+            ],
+        ],
+    ],
 ];
