@@ -4,7 +4,7 @@ $queryString = !empty($query) ? '?' . $query : '';
 ?>
 <script src="<?= $this->api . $queryString ?>" async defer></script>
 <?php
-if (isset($this->parameters['render']) && $this->parameters['render'] !== 'explicit') : ?>
+if (!isset($this->parameters['render']) || $this->parameters['render'] !== 'explicit') : ?>
     <div
         class="g-recaptcha"
         data-sitekey="<?= $this->escapeHtmlAttr($this->sitekey) ?>"
