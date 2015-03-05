@@ -124,7 +124,7 @@ return [
 
 ```php
 return [
-    'g-recaptcha2.0' => [
+    'grecaptcha2.0' => [
         'api' => 'https://www.google.com/recaptcha/api.js'
         // Optional API parameters - see https://developers.google.com/recaptcha/docs/display
         'parameters' => [
@@ -136,8 +136,8 @@ return [
     
     'hanger_snippet' => [
         'snippets' => [
-            'google-recaptcha2.0' => [
-                'config_key' => 'g-recaptcha2.0', // the config node in the global config, if any
+            'google-recaptcha-2-0' => [
+                'config_key' => 'grecaptcha2.0', // the config node in the global config, if any
                 'values' => [
                     'sitekey' => '',
                     // Optional configurations - see https://developers.google.com/recaptcha/docs/display
@@ -157,7 +157,7 @@ The placement of Google ReCaptcha snippet, unlike the others, needs to be specif
 To place this snippet where you need it ...
 
 ```php
-echo $this->hangerSnippet()->render('google-recaptcha2.0');
+echo $this->hangerSnippet()->render('google-recaptcha-2-0');
 ```
 
 ##### NOTE
