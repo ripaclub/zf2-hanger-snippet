@@ -151,9 +151,9 @@ return [
 ];
 ```
 
-The placement of Google ReCaptcha snippet, unlike the others, needs to be specified (it can not simply be appended to the page).
+The placement of Google ReCaptcha snippet, unlike the others, needs to be specified (it can not be simply appended to the page).
 
-To place this snippet where we need it we can do:
+To place this snippet where you need it ...
 
 ```php
 echo $this->hangerSnippet()->render('google-recaptcha2.0');
