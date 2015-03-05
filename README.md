@@ -162,7 +162,7 @@ echo $this->hangerSnippet()->render('google-recaptcha-2-0');
 
 ##### NOTE
 
-The string `google-recaptcha2.0` is the default name of the placement for this snippet (see `module.config.php`).
+The string `google-recaptcha-2-0` is the default name of the placement for this snippet (see `module.config.php`).
 
 ---
 
