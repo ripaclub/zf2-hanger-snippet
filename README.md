@@ -1,4 +1,5 @@
 # HangerSnippet
+
 [![Travis](https://img.shields.io/travis/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
 [![Packagist](https://img.shields.io/packagist/v/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://packagist.org/packages/ripaclub/zf2-hanger-snippet)
 [![License](https://img.shields.io/packagist/l/ripaclub/zf2-hanger-snippet.svg?style=flat-square)](https://github.com/ripaclub/zf2-hanger-snippet/blob/master/LICENSE.txt)
@@ -165,6 +166,6 @@ The string `google-recaptcha2.0` is the default name of the placement for this s
 
 ---
 
-Develop: [![Build Status](https://travis-ci.org/ripaclub/zf2-hanger-snippet.svg?branch=develop)](https://travis-ci.org/ripaclub/zf2-hanger-snippet)
+Develop: [![Travis develop branch](https://img.shields.io/travis/ripaclub/zf2-hanger-snippet/develop.svg?style=flat-square)](https://travis-ci.org/ripaclub/zf2-hanger-snippet?branch=develop)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-hanger-snippet)](https://github.com/igrigorik/ga-beacon)
