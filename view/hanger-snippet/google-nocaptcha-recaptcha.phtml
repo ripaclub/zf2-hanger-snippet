@@ -2,16 +2,11 @@
 $query = http_build_query((array) $this->parameters);
 $queryString = !empty($query) ? '?' . $query : '';
 ?>
-<script src="<?= $this->uri . $queryString ?>" async defer></script>
+<script src="<?= $this->escapeHtmlAttr($this->uri . $queryString) ?>" async defer></script>
 <?php
 if (!isset($this->parameters['render']) || $this->parameters['render'] !== 'explicit') : ?>
-    <div
-        class="g-recaptcha"
-        data-sitekey="<?= $this->escapeHtmlAttr($this->sitekey) ?>"
-        <?= !empty($this->theme) ? ' data-theme="' . $this->escapeHtmlAttr($this->theme) . '"': '' ?>
-        <?= !empty($this->type) ? ' data-type="' . $this->escapeHtmlAttr($this->type) . '"': '' ?>
-        <?= !empty($this->callback) ? ' data-callback="' . $this->escapeHtmlAttr($this->callback) . '"': '' ?>
-        <?= !empty($this->expiredCallback) ? ' data-expired-callback="' . $this->escapeHtmlAttr($this->expiredCallback) . '"': '' ?>
-    ></div>
-    <?php
+<div
+    class="g-recaptcha"
+    data-sitekey="<?= $this->escapeHtmlAttr($this->sitekey) ?>"
+    <?= !empty($this->theme) ? ' data-theme="' . $this->escapeHtmlAttr($this->theme) . '"': '' ?><?= !empty($this->type) ? ' data-type="' . $this->escapeHtmlAttr($this->type) . '"': '' ?><?= !empty($this->callback) ? ' data-callback="' . $this->escapeHtmlAttr($this->callback) . '"': '' ?><?= !empty($this->expiredCallback) ? ' data-expired-callback="' . $this->escapeHtmlAttr($this->expiredCallback) . '"': '' ?>></div><?php
 endif;
