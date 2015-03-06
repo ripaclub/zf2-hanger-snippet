@@ -13,8 +13,8 @@ return [
     ],
     'hanger_snippet' => [
         'snippets' => [
-            'google-recaptcha-2-0' => [
-                'placement' => 'google-recaptcha-2-0',
+            'google-nocaptcha-recaptcha' => [
+                'placement' => 'google-nocaptcha-recaptcha',
             ],
         ],
     ],

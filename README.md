@@ -118,7 +118,7 @@ return [
 ];
 ```
 
-### Google ReCaptcha 2.0
+### Google no CAPTCHA reCAPTCHA
 
 **Configuration**:
 
@@ -136,7 +136,7 @@ return [
     
     'hanger_snippet' => [
         'snippets' => [
-            'google-recaptcha-2-0' => [
+            'google-nocaptcha-recaptcha' => [
                 'config_key' => 'grecaptcha2.0', // the config node in the global config, if any
                 'values' => [
                     'sitekey' => '',
@@ -157,12 +157,12 @@ The placement of Google ReCaptcha snippet, unlike the others, needs to be specif
 To place this snippet where you need it ...
 
 ```php
-echo $this->hangerSnippet()->render('google-recaptcha-2-0');
+echo $this->hangerSnippet()->render('google-nocaptcha-recaptcha');
 ```
 
 ##### NOTE
 
-The string `google-recaptcha-2-0` is the default name of the placement for this snippet (see `module.config.php`).
+The string `google-nocaptcha-recaptcha` is the default name of the placement for this snippet (see `module.config.php`).
 
 ---
 
