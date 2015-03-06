@@ -2,7 +2,7 @@
 $query = http_build_query((array) $this->parameters);
 $queryString = !empty($query) ? '?' . $query : '';
 ?>
-<script src="<?= $this->api . $queryString ?>" async defer></script>
+<script src="<?= $this->uri . $queryString ?>" async defer></script>
 <?php
 if (!isset($this->parameters['render']) || $this->parameters['render'] !== 'explicit') : ?>
     <div
