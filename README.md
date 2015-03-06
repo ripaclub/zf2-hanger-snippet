@@ -125,7 +125,7 @@ return [
 ```php
 return [
     'grecaptcha2.0' => [
-        'api' => 'https://www.google.com/recaptcha/api.js'
+        'uri' => 'https://www.google.com/recaptcha/api.js'
         // Optional API parameters - see https://developers.google.com/recaptcha/docs/display
         'parameters' => [
             'render' => 'onload',
