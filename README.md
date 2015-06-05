@@ -72,10 +72,11 @@ return [
     'ga' => [
         'monitoring_id' => 'UA-XXXXXXXX-X',
         'domain'        => 'yourdomain.com',
+        'anonymize_ip'  => false, // refer to https://developers.google.com/analytics/devguides/collection/analyticsjs/advanced#anonymizeip for more information
         'options' => [
             'siteSpeedSampleRate' => 1,
             'sampleRate' => 100
-            // check https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
+            // refer to https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference for more options
         ],
     ],
 
