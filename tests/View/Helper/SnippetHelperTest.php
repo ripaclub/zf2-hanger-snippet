@@ -6,8 +6,6 @@ use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Class SnippetHelperTest
- * @author Leonardo Grasso <me@leonardograsso.com>
- * @author Lorenzo Fontana <fontanalorenzo@me.com>
  */
 class SnippetHelperTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,6 +23,7 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper = new SnippetHelper();
         $view = new PhpRenderer();
+        $view->resolver()->addPath(__DIR__ . '/../../../view');
         $view->resolver()->addPath(__DIR__ . '/_files/modules');
         $this->helper->setView($view);
     }
@@ -115,6 +114,10 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param $name
+     * @param $template
+     * @param $values
+     * @param $expected
      * @dataProvider snippetsProvider
      */
     public function testRender($name, $template, $values, $expected)
@@ -139,8 +142,11 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $return);
     }
 
-
     /**
+     * @param $name
+     * @param $template
+     * @param $values
+     * @param $expected
      * @dataProvider snippetsProvider
      */
     public function testToString($name, $template, $values, $expected)
@@ -150,11 +156,13 @@ class SnippetHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $return);
     }
 
-
     /**
+     * @param $name
+     * @param $template
+     * @param $values
      * @dataProvider snippetsProvider
      */
-    public function testInvoke($name, $template, $values, $expected)
+    public function testInvoke($name, $template, $values)
     {
         $this->helper->appendSnippet($name, $template, $values);
         $invoke = $this->helper->__invoke();
@@ -207,6 +215,28 @@ HTML;
 </script>
 HTML;
 
+        $nocaptchaSnippet1 = <<<HTML
+<script src="http&#x3A;&#x2F;&#x2F;www.google.com&#x2F;justatry.js" async defer></script>
+<div
+    class="g-recaptcha"
+    data-sitekey="qwertyuiop"
+    ></div>
+HTML;
+
+        $nocaptchaSnippet2 = <<<HTML
+<script src="http&#x3A;&#x2F;&#x2F;www.google.com&#x2F;justatry.js&#x3F;render&#x3D;explicit" async defer></script>
+
+HTML;
+
+        $nocaptchaSnippet3 = <<<HTML
+<script src="http&#x3A;&#x2F;&#x2F;www.google.com&#x2F;justatry.js" async defer></script>
+<div
+    class="g-recaptcha"
+    data-sitekey="qwertyuiop"
+     data-theme="dark"></div>
+HTML;
+
+
         return [
             [
                 'test',
@@ -224,7 +254,38 @@ HTML;
                     'bar' => 'BAAAAAAAARRRRR'
                 ],
                 $anotherTestSnippet
-            ]
+            ],
+            [
+                'google-nocaptcha-recaptcha-1',
+                'hanger-snippet/google-nocaptcha-recaptcha',
+                [
+                    'uri' => 'http://www.google.com/justatry.js',
+                    'sitekey' => 'qwertyuiop',
+                ],
+                $nocaptchaSnippet1
+            ],
+            [
+                'google-nocaptcha-recaptcha-2',
+                'hanger-snippet/google-nocaptcha-recaptcha',
+                [
+                    'uri' => 'http://www.google.com/justatry.js',
+                    'sitekey' => 'qwertyuiop',
+                    'parameters' => [
+                        'render' => 'explicit',
+                    ],
+                ],
+                $nocaptchaSnippet2
+            ],
+            [
+                'google-nocaptcha-recaptcha-3',
+                'hanger-snippet/google-nocaptcha-recaptcha',
+                [
+                    'uri' => 'http://www.google.com/justatry.js',
+                    'sitekey' => 'qwertyuiop',
+                    'theme' => 'dark',
+                ],
+                $nocaptchaSnippet3
+            ],
         ];
     }
 }

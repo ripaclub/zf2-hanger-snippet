@@ -84,12 +84,13 @@ class SnippetHelper extends AbstractHelper
      * @param bool $enabled
      * @return \HangerSnippet\View\Helper\SnippetHelper
      */
-    public function appendSnippet($name,
-                                  $template,
-                                  array $values = [],
-                                  $placement = null,
-                                  $enabled = true)
-    {
+    public function appendSnippet(
+        $name,
+        $template,
+        array $values = [],
+        $placement = null,
+        $enabled = true
+    ) {
         $this->snippets[$name] = [
             'placement' => $placement,
             'template' => $template,
