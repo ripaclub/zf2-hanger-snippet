@@ -215,6 +215,20 @@ HTML;
 </script>
 HTML;
 
+        $gaAnonymizeIP = <<<HTML
+<script type="text/javascript">
+    <!--
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'FOOOOOOO', 'BAAAAAAAARRRRR');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    -->
+</script>
+HTML;
+
         $nocaptchaSnippet1 = <<<HTML
 <script src="http&#x3A;&#x2F;&#x2F;www.google.com&#x2F;justatry.js" async defer></script>
 <div
@@ -251,9 +265,19 @@ HTML;
                 'hanger-snippet/anothertest',
                 [
                     'foo' => 'FOOOOOOO',
-                    'bar' => 'BAAAAAAAARRRRR'
+                    'bar' => 'BAAAAAAAARRRRR',
                 ],
                 $anotherTestSnippet
+            ],
+            [
+                'ga-anonymize-ip',
+                'hanger-snippet/google-analytics',
+                [
+                    'monitoring_id' => 'FOOOOOOO',
+                    'domain' => 'BAAAAAAAARRRRR',
+                    'anonymize_ip' => true
+                ],
+                $gaAnonymizeIP
             ],
             [
                 'google-nocaptcha-recaptcha-1',
