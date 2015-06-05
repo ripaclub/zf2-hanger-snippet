@@ -24,8 +24,7 @@
     ga('create', '<?= $this->monitoring_id; ?>', '<?= $this->domain; ?>');
     <?php
     endif;
-    ?>
-    <?php
+
     if($this->anonymize_ip === true) :
     ?>
     ga('set', 'anonymizeIp', true);
