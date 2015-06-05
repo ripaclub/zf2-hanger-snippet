@@ -57,6 +57,8 @@
     "google analytics",
     "facebook",
     "universal analytics",
+    "google no recaptcha",
+    "google recaptcha 2.0",
     "zend framework"
   ]
 }
