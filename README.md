@@ -21,7 +21,7 @@ Add `ripaclub/zf2-hanger-snippet` to your composer.json
 ```json
 {
    "require": {
-       "ripaclub/zf2-hanger-snippet": "~1.0.5"
+       "ripaclub/zf2-hanger-snippet": "~1.0.6"
    }
 }
 ```
