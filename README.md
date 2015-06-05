@@ -61,6 +61,16 @@ return [
 ];
 ```
 
+Do not forget to add **HangerSnippet** module to you `application.config.php` file.
+
+```php
+'modules' => [
+        // ...
+        'HangerSnippet',
+        'Application',
+],
+```
+
 ## Built-in snippets
 
 ### Google Analytics
