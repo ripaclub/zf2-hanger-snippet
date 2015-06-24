@@ -177,6 +177,4 @@ The string `google-nocaptcha-recaptcha` is the default name of the placement for
 
 ---
 
-Develop: [![Travis develop branch](https://img.shields.io/travis/ripaclub/zf2-hanger-snippet/develop.svg?style=flat-square)](https://travis-ci.org/ripaclub/zf2-hanger-snippet?branch=develop)
-
-[![Analytics](https://ga-beacon.appspot.com/UA-49655829-1/ripaclub/zf2-hanger-snippet)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-49657176-3/zf2-hanger-snippet)](https://github.com/igrigorik/ga-beacon)
